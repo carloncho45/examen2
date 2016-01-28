@@ -86,10 +86,10 @@ public class LlenarPais extends AsyncTask<Void, Void, Void> {
                         json.append(line + "\n");
                     }
                     br.close();
-                   /// Log.d("datos", json.toString());
+                 Log.d("datos", json.toString());
                     JSONArray jsonArray = new JSONArray(json.toString());
                     int SizeArray = jsonArray.length();
-                 //   Log.d("tamaño: ", String.valueOf(SizeArray));
+                  Log.d("tamaño: ", String.valueOf(SizeArray));
                     PaisStructure Row=null;
                     //recorre el array de paises y coge solo el nombre del pais
                     for (int x = 0; x < SizeArray; x++) {
@@ -104,12 +104,18 @@ public class LlenarPais extends AsyncTask<Void, Void, Void> {
                       //  Log.d("cod_", codPais);
                         Row.setNamePais(namePais);
 
-                        String arrayLatLon=jsonArray.getJSONObject(x).getString("latlng");
-                        JSONArray jsonArray2=new JSONArray(arrayLatLon);
-                        String latitud=jsonArray2.getString(0);
-                        String longitud=jsonArray2.getString(1);
-                        Row.setLatitud(latitud);
-                        Row.setLogintud(longitud);
+
+                            String arrayLatLon=jsonArray.getJSONObject(x).getString("latlng");
+                            JSONArray jsonArray2=new JSONArray(arrayLatLon);
+                            Log.d("xxxx", jsonArray2.toString() + "**" + String.valueOf(x));
+
+                         if(jsonArray2.length()!=0){
+                             String latitud=jsonArray2.getString(0);
+                             String longitud=jsonArray2.getString(1);
+                             Row.setLatitud(latitud);
+                             Row.setLogintud(longitud);
+                         }
+
                         arrayPaises.add(Row);
                     }
 

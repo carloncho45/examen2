@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -14,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -38,7 +41,9 @@ public class RegistroActivity extends AppCompatActivity implements AdapterView.O
     public static Activity REGISTRO_ACTIVITY = null;
     //EXTRAE LA VARIABLE arrayPaises de la clase  LlenarPiis
     private ArrayList<PaisStructure> arrayList=LlenarPais.arrayPaises;
-
+    private ArrayList<PaisStructure>arrayListBuca=new ArrayList<PaisStructure>();
+    private ArrayAdapter<PaisStructure> adapter;
+    private int textlength = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +57,39 @@ public class RegistroActivity extends AppCompatActivity implements AdapterView.O
 
         registerForContextMenu(ListItem);
         new LlenarPais().execute();
+        EditPais.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                textlength = EditPais.getText().length();
+                PaisStructure row= null;
+                arrayListBuca.clear();
+                for (int i = 0; i < arrayList.size(); i++) {
+                    if (textlength <= arrayList.get(i).getNamePais().toString().length()) {
+                        if (EditPais.getText().toString().equalsIgnoreCase((String)
+                                arrayList.get(i).getNamePais().subSequence(0, textlength))) {
+                            row=new PaisStructure();
+                           row.setNamePais(arrayList.get(i).getNamePais().toLowerCase());
+                            arrayListBuca.add(row);
+                        }
+                    }
+                }
+
+                adapter =new ArrayAdapter<PaisStructure>(RegistroActivity.this, android.R.layout.simple_list_item_1,arrayListBuca);
+                ListItem.setAdapter(adapter);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
        // Toast.makeText(getApplicationContext(),String.valueOf(arrayList.get(1).getNamePais()),Toast.LENGTH_LONG).show();
     }
     @Override
