@@ -1,0 +1,10 @@
+C:\windows\system32>cd..
+
+C:\Windows>cd..
+
+C:\>cd programa files
+El sistema no puede encontrar la ruta especificada.
+C:\Program Files\Java\jdk1.8.0\bin
+
+C:\Program Files\Java\jdk1.8.0\bin>keytool.exe -list -v -keystore C:\Users\esantiago\.android\debug.keystore
+4B:39:1F:7A:BB:72:CA:94:EC:CA:16:42:D1:EA:80:3A:FB:16:E1:7D
