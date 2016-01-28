@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".frm_new_group_segurity">
+
+    <item android:id="@+id/I_AGREGAR"
+        android:title="@string/addItem"></item>
+
+    <item android:id="@+id/I_ELIMINAR"
+        android:title="@string/deleteItem"/>
+
+
+</menu>
